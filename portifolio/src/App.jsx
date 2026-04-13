@@ -11,8 +11,8 @@ export default function App() {
         <Route element={<Layout />}>
           <Route path="/" element={<HomePage />} />
           <Route
-            path="/quem-sou"
-            element={<ContentPage pageKey="quem-sou" />}
+            path="/habilidades"
+            element={<ContentPage pageKey="habilidades" />}
           />
           <Route
             path="/experiencias"

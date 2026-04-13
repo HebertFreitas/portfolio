@@ -6,6 +6,7 @@ import { FullPageSection } from "./FullPageSection.jsx"
 import { FaDownload, FaLinkedin, FaGithub, FaWhatsapp } from "react-icons/fa"
 import { FiChevronDown } from "react-icons/fi"
 import { Reveal } from "../components/Reveal.jsx"
+import { cardHoverEffect } from "../styles/hoverEffects.js"
 
 const MotionBox = motion.create(Box)
 export function HeroSection() {
@@ -55,7 +56,7 @@ export function HeroSection() {
 
             <HStack gap="3" flexWrap="wrap">
             <Reveal delay={0.70}>
-              <Button asChild colorPalette="blue" rounded="full" borderRadius="8px" variant="outline">
+              <Button asChild colorPalette="blue" rounded="full" borderRadius="8px" variant="outline" {...cardHoverEffect}>
                 <a href="https://www.linkedin.com/in/hebert-freitas-775093175/" target="_blank" rel="noreferrer">
                   <HStack gap="2">
                     <FaLinkedin size={20} />
@@ -66,7 +67,7 @@ export function HeroSection() {
               </Reveal>
              
               <Reveal delay={0.80}>
-              <Button asChild colorPalette="blue" rounded="full" borderRadius="8px" variant="outline">
+              <Button asChild colorPalette="blue" rounded="full" borderRadius="8px" variant="outline" {...cardHoverEffect}>
                 <a href="https://github.com/HebertFreitas" target="_blank" rel="noreferrer">
                   <HStack gap="2">
                     <FaGithub size={20} />
@@ -76,7 +77,7 @@ export function HeroSection() {
               </Button>
               </Reveal>
               <Reveal delay={0.90}>
-              <Button asChild colorPalette="blue" rounded="full" borderRadius="8px" variant="outline">
+              <Button asChild colorPalette="blue" rounded="full" borderRadius="8px" variant="outline" {...cardHoverEffect}>
                 <a href="https://wa.me/5531991059695" target="_blank" rel="noreferrer">
                   <HStack gap="2">
                     <FaWhatsapp size={20} />
@@ -86,7 +87,7 @@ export function HeroSection() {
               </Button>
               </Reveal>
               <Reveal delay={1.0}>
-              <Button asChild colorPalette="blue" rounded="full" borderRadius="8px">
+              <Button p="2" asChild colorPalette="blue" rounded="full" borderRadius="8px" {...cardHoverEffect}>
                 <RouterLink to="/#contato">
                   <HStack gap="2">
                     <FaDownload size={20} />

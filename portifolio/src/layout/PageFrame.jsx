@@ -12,6 +12,7 @@ import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { FiMenu, FiX } from "react-icons/fi";
 
 import { ThemeToggle } from "../components/ThemeToggle.jsx";
+import { hover } from "motion/react";
 
 const navItems = [
   { label: "INICIO", to: "/#inicio", id: "inicio" },
@@ -121,7 +122,7 @@ export function PageFrame({ children }) {
           py={{ base: "4", md: "5" }}
           bg={{
             base: "bg",
-            _dark: isScrolled ? "rgba(0,0,0,0.78)" : "rgba(0,0,0,0.55)",
+            _dark: isScrolled ? "rgba(0, 0, 0, 0.31)" : "rgba(0, 0, 0, 0.13)",
           }}
           borderBottomWidth="1px"
           borderColor={{ base: "border", _dark: "whiteAlpha.200" }}
@@ -132,7 +133,7 @@ export function PageFrame({ children }) {
             inset="0"
             pointerEvents="none"
             opacity={{ base: 0, _dark: 1 }}
-            bg="radial-gradient(700px 260px at 30% 0%, rgba(255,255,255,0.08), transparent 60%)"
+            bg="radial-gradient(700px 260px at 30% 0%, rgba(255, 255, 255, 0.08), transparent 60%)"
           />
           <Box position="relative" maxW="100%" mx="auto">
             <HStack w="full" justify="space-between" align="center" gap="6">
@@ -149,6 +150,7 @@ export function PageFrame({ children }) {
                   gap={{ base: "2", lg: "7" }}
                   display={{ base: "none", md: "flex" }}
                   align="center"
+                  {...hover.glowHoverEffect}
                 >
                   {navItems.map((item) => (
                     <Link

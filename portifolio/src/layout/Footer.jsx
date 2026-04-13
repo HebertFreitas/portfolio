@@ -2,7 +2,7 @@ import { Box, Container, Link, Text } from "@chakra-ui/react"
 
 export function Footer() {
   return (
-    <Box as="footer" borderTopWidth="1px" borderColor={{ base: "border", _dark: "whiteAlpha.200" }} bg="transparent">
+    <Box alignContent="center" justifyContent="center" as="footer" borderTopWidth="1px" borderColor={{ base: "border", _dark: "whiteAlpha.200" }} bg="transparent">
       <Container
         maxW="6xl"
         py="6"
