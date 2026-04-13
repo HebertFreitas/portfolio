@@ -1,7 +1,7 @@
 import { Text } from "@chakra-ui/react"
 
 import { FullPageSection } from "./FullPageSection.jsx"
-import { GlassCard } from "./GlassCard.jsx"
+import { GlassCard } from "../components/GlassCard.jsx"
 import { Reveal } from "../components/Reveal.jsx"
 
 export function KnowledgeSection() {
