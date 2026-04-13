@@ -1,0 +1,24 @@
+html,
+body {
+  height: 100%;
+}
+
+@media (min-width: 1024px) {
+  html {
+    scroll-behavior: smooth;
+    scroll-snap-type: y mandatory;
+  }
+}
+
+.vertical-timeline {
+  max-width: none !important;
+  width: 100% !important;
+}
+
+body {
+  margin: 0;
+}
+
+#root {
+  min-height: 100%;
+}
