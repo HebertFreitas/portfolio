@@ -32,10 +32,11 @@ export function ProjectCard({ project }) {
         {project.image ? (
           <Image
             src={project.image}
-            alt={project.title}
+            alt={`Preview do projeto ${project.title}`}
             w="full"
             h="full"
             objectFit="cover"
+            loading="lazy"
           />
         ) : (
           <Text

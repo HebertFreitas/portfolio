@@ -9,11 +9,11 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { motion } from "motion/react";
-import { Link as RouterLink } from "react-router-dom";
 import { FaDownload, FaGithub, FaLinkedin, FaWhatsapp } from "react-icons/fa";
 import { FiChevronDown } from "react-icons/fi";
 
 import { Reveal } from "../components/Reveal.jsx";
+import { RESUME_FILENAME, RESUME_URL } from "../data/siteLinks.js";
 import { FullPageSection } from "./FullPageSection.jsx";
 import { cardHoverEffect } from "../styles/hoverEffects.js";
 
@@ -207,12 +207,12 @@ export function HeroSection() {
                 variant="ghost"
                 {...cardHoverEffect}
               >
-                <RouterLink to="/#contato">
+                <a href={RESUME_URL} download={RESUME_FILENAME}>
                   <HStack gap="2">
                     <FaDownload size={16} />
                     <span>Baixar currículo</span>
                   </HStack>
-                </RouterLink>
+                </a>
               </Button>
             </HStack>
           </Reveal>
