@@ -1,142 +1,272 @@
-import { Box, Button, Heading, HStack, Image, SimpleGrid, Stack, Text } from "@chakra-ui/react"
-import { motion } from "motion/react"
-import { Link as RouterLink } from "react-router-dom"
+import {
+  Box,
+  Button,
+  Heading,
+  HStack,
+  Image,
+  SimpleGrid,
+  Stack,
+  Text,
+} from "@chakra-ui/react";
+import { motion } from "motion/react";
+import { Link as RouterLink } from "react-router-dom";
+import { FaDownload, FaGithub, FaLinkedin, FaWhatsapp } from "react-icons/fa";
+import { FiChevronDown } from "react-icons/fi";
 
-import { FullPageSection } from "./FullPageSection.jsx"
-import { FaDownload, FaLinkedin, FaGithub, FaWhatsapp } from "react-icons/fa"
-import { FiChevronDown } from "react-icons/fi"
-import { Reveal } from "../components/Reveal.jsx"
-import { cardHoverEffect } from "../styles/hoverEffects.js"
+import { Reveal } from "../components/Reveal.jsx";
+import { FullPageSection } from "./FullPageSection.jsx";
+import { cardHoverEffect } from "../styles/hoverEffects.js";
 
-const MotionBox = motion.create(Box)
+const MotionBox = motion.create(Box);
+
+const WHATSAPP_URL = "https://wa.me/5531991059695";
+const LINKEDIN_URL = "https://www.linkedin.com/in/hebert-freitas-775093175/";
+const GITHUB_URL = "https://github.com/HebertFreitas";
+
 export function HeroSection() {
   return (
-    <FullPageSection id="inicio">
-      <SimpleGrid columns={{ base: 1, lg: 2 }} gap={{ base: "25px", lg: "45px" }} alignItems="center" w="full">
-        <Stack gap="7">
-          <Stack gap="4">
-           
-              <Heading
-                fontSize={{ base: "40px", md: "66px" }}
-                lineHeight={{ base: "1.05", md: "0.98" }}
-                letterSpacing="-0.06em"
-              >
-                <HStack align="center" gap={{ base: "4", md: "10" }} flexWrap="wrap">
-                <Reveal delay={0.20}>
-                  <Box as="span">
-                    Olá, eu sou{" "}
-                    <Box as="span" fontWeight="bold" color="blue.400">
-                      Hebert
-                      <br />
-                      Freitas
-                    </Box>
-                  </Box>
-                </Reveal>
-                </HStack>
-                <Reveal delay={0.40}>
-                <Box as="span" display="block" mt="5">
-                  Desenvolvedor FullStack
-                </Box>
-                </Reveal>
-              </Heading>
-            
+    <FullPageSection id="inicio" fillViewport>
+      <Box
+        position="absolute"
+        inset="0"
+        pointerEvents="none"
+        overflow="hidden"
+        aria-hidden="true"
+      >
+        <Box
+          position="absolute"
+          top="-20%"
+          left="50%"
+          transform="translateX(-50%)"
+          w={{ base: "320px", md: "560px" }}
+          h={{ base: "320px", md: "560px" }}
+          rounded="full"
+          bg={{ base: "blue.100/60", _dark: "blue.600/15" }}
+          filter="blur(80px)"
+        />
+      </Box>
 
-            <Reveal delay={0.60}>
+      <SimpleGrid
+        columns={{ base: 1, lg: 2 }}
+        gap={{ base: "10", lg: "16" }}
+        alignItems="center"
+        w="full"
+        position="relative"
+      >
+        <Stack gap="7" align="center" textAlign="center">
+          <Stack gap="5" align="center" w="full">
+            <Reveal delay={0.05}>
+              <Box
+                display="inline-flex"
+                alignItems="center"
+                gap="2"
+                rounded="full"
+                borderWidth="1px"
+                borderColor={{ base: "blue.200", _dark: "blue.400/30" }}
+                bg={{ base: "blue.50", _dark: "blue.950/40" }}
+                px="4"
+                py="1.5"
+                fontSize="sm"
+                fontWeight="600"
+                color={{ base: "blue.700", _dark: "blue.300" }}
+              >
+                <Box
+                  boxSize="1.5"
+                  rounded="full"
+                  bg="green.400"
+                  animation="pulse 2s ease-in-out infinite"
+                />
+                Disponível para novos projetos
+              </Box>
+            </Reveal>
+
+            <Heading
+              as="h1"
+              fontSize={{ base: "2.5rem", md: "4rem", lg: "4.5rem" }}
+              lineHeight={{ base: "1.08", md: "1.02" }}
+              letterSpacing="-0.04em"
+              fontWeight="800"
+            >
+              <Reveal delay={0.1}>
+                <Box as="span" display="block">
+                  Construo produtos digitais
+                </Box>
+              </Reveal>
+              <Reveal delay={0.18}>
+                <Box
+                  as="span"
+                  display="block"
+                  mt="2"
+                  bgGradient="to-r"
+                  gradientFrom={{ base: "blue.500", _dark: "blue.300" }}
+                  gradientTo={{ base: "purple.500", _dark: "purple.300" }}
+                  bgClip="text"
+                  color="transparent"
+                >
+                  de ponta a ponta.
+                </Box>
+              </Reveal>
+            </Heading>
+
+            <Reveal delay={0.26}>
               <Text
                 maxW="lg"
+                mx="auto"
                 color={{ base: "fg.muted", _dark: "whiteAlpha.700" }}
                 fontSize={{ base: "md", md: "lg" }}
+                lineHeight="1.75"
               >
-                Desenvolvedor Fullstack com sólida experiência em desenvolvimento web (React) e mobile (Flutter), atualmente expandindo meus
-                horizontes com .NET. Minha paixão por Front-end e Back-end me motiva a buscar desafios no desenvolvimento de sistemas
-                destribuídos e de alta performance.
+                Olá, sou{" "}
+                <Box as="span" fontWeight="700" color={{ base: "fg", _dark: "whiteAlpha.900" }}>
+                  Hebert Freitas
+                </Box>
+                — Desenvolvedor Full Stack com experiência em React, Flutter e .NET.
+                Transformo requisitos complexos em aplicações web e mobile escaláveis,
+                com foco em performance e qualidade de código.
               </Text>
             </Reveal>
           </Stack>
 
-            <HStack gap="3" flexWrap="wrap">
-            <Reveal delay={0.70}>
-              <Button asChild colorPalette="blue" rounded="full" borderRadius="8px" variant="outline" {...cardHoverEffect}>
-                <a href="https://www.linkedin.com/in/hebert-freitas-775093175/" target="_blank" rel="noreferrer">
+          <Reveal delay={0.34}>
+            <HStack gap="3" flexWrap="wrap" justify="center">
+              <Button
+                asChild
+                colorPalette="blue"
+                size="lg"
+                rounded="lg"
+                px="6"
+                {...cardHoverEffect}
+              >
+                <a href={WHATSAPP_URL} target="_blank" rel="noreferrer">
                   <HStack gap="2">
-                    <FaLinkedin size={20} />
-                    {/* <span>LinkedIn</span> */}
+                    <FaWhatsapp size={18} />
+                    <span>Iniciar conversa</span>
                   </HStack>
                 </a>
               </Button>
-              </Reveal>
-             
-              <Reveal delay={0.80}>
-              <Button asChild colorPalette="blue" rounded="full" borderRadius="8px" variant="outline" {...cardHoverEffect}>
-                <a href="https://github.com/HebertFreitas" target="_blank" rel="noreferrer">
-                  <HStack gap="2">
-                    <FaGithub size={20} />
-                    {/* <span>LinkedIn</span> */}
-                  </HStack>
+
+              <Button
+                asChild
+                variant="outline"
+                size="lg"
+                rounded="lg"
+                px="6"
+                borderColor={{ base: "border", _dark: "whiteAlpha.300" }}
+                {...cardHoverEffect}
+              >
+                <a
+                  href="#habilidades"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    document
+                      .getElementById("habilidades")
+                      ?.scrollIntoView({ behavior: "smooth" });
+                  }}
+                >
+                  Ver habilidades →
                 </a>
               </Button>
-              </Reveal>
-              <Reveal delay={0.90}>
-              <Button asChild colorPalette="blue" rounded="full" borderRadius="8px" variant="outline" {...cardHoverEffect}>
-                <a href="https://wa.me/5531991059695" target="_blank" rel="noreferrer">
-                  <HStack gap="2">
-                    <FaWhatsapp size={20} />
-                    {/* <span>LinkedIn</span> */}
-                  </HStack>
+            </HStack>
+          </Reveal>
+
+          <Reveal delay={0.42}>
+            <HStack gap="3" flexWrap="wrap" justify="center">
+              <Button
+                asChild
+                colorPalette="blue"
+                rounded="full"
+                variant="outline"
+                size="sm"
+                aria-label="LinkedIn"
+                {...cardHoverEffect}
+              >
+                <a href={LINKEDIN_URL} target="_blank" rel="noreferrer">
+                  <FaLinkedin size={18} />
                 </a>
               </Button>
-              </Reveal>
-              <Reveal delay={1.0}>
-              <Button p="2" asChild colorPalette="blue" rounded="full" borderRadius="8px" {...cardHoverEffect}>
+
+              <Button
+                asChild
+                colorPalette="blue"
+                rounded="full"
+                variant="outline"
+                size="sm"
+                aria-label="GitHub"
+                {...cardHoverEffect}
+              >
+                <a href={GITHUB_URL} target="_blank" rel="noreferrer">
+                  <FaGithub size={18} />
+                </a>
+              </Button>
+
+              <Button
+                asChild
+                colorPalette="blue"
+                rounded="lg"
+                size="sm"
+                variant="ghost"
+                {...cardHoverEffect}
+              >
                 <RouterLink to="/#contato">
                   <HStack gap="2">
-                    <FaDownload size={20} />
-                    <span>Baixar Currículo</span>
+                    <FaDownload size={16} />
+                    <span>Baixar currículo</span>
                   </HStack>
                 </RouterLink>
               </Button>
-              </Reveal>
             </HStack>
-        
+          </Reveal>
         </Stack>
 
         <Stack gap="5" alignItems="center">
-          <Reveal delay={1.2}>
+          <Reveal delay={0.5}>
             <Box
               rounded="full"
               overflow="hidden"
               borderWidth="1px"
               borderColor={{ base: "border", _dark: "whiteAlpha.200" }}
-              boxSize={{ base: "300px", md: "420px" }}
+              boxSize={{ base: "280px", md: "400px", lg: "420px" }}
               flex="0 0 auto"
-              boxShadow="0 0 70px rgb(16, 93, 216)"
+              boxShadow={{
+                base: "0 0 40px rgba(59, 130, 246, 0.25)",
+                _dark: "0 0 70px rgba(59, 130, 246, 0.35)",
+              }}
             >
-              <Image src="/uploads/me2.png" alt="Hebert Freitas" w="100%" h="100%" objectFit="cover" />
+              <Image
+                src="/uploads/me2.png"
+                alt="Hebert Freitas — Desenvolvedor Full Stack especializado em React, Flutter e .NET"
+                w="100%"
+                h="100%"
+                objectFit="cover"
+                loading="eager"
+                fetchPriority="high"
+              />
             </Box>
           </Reveal>
-
         </Stack>
       </SimpleGrid>
 
       <MotionBox
         position="absolute"
         insetInline="0"
-        bottom={{ base: "40px", md: "70px" }}
+        bottom={{ base: "24px", md: "48px" }}
         display="flex"
         justifyContent="center"
         initial={{ opacity: 0 }}
-        animate={{ opacity: 1, y: [0, 10, 0] }}
-        transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut", delay: 1.3 }}
+        animate={{ opacity: 1, y: [0, 8, 0] }}
+        transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut", delay: 1.2 }}
         color={{ base: "fg.muted", _dark: "whiteAlpha.700" }}
         cursor="pointer"
         role="button"
         tabIndex={0}
         aria-label="Rolar para a próxima seção"
-        onClick={() => document.getElementById("habilidades")?.scrollIntoView({ behavior: "smooth" })}
+        onClick={() =>
+          document.getElementById("habilidades")?.scrollIntoView({ behavior: "smooth" })
+        }
         onKeyDown={(e) => {
           if (e.key === "Enter" || e.key === " ") {
-            e.preventDefault()
-            document.getElementById("habilidades")?.scrollIntoView({ behavior: "smooth" })
+            e.preventDefault();
+            document.getElementById("habilidades")?.scrollIntoView({ behavior: "smooth" });
           }
         }}
       >
@@ -155,6 +285,5 @@ export function HeroSection() {
         </Box>
       </MotionBox>
     </FullPageSection>
-  )
+  );
 }
-

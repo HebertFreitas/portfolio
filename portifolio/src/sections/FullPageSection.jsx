@@ -1,20 +1,24 @@
 import { Box } from "@chakra-ui/react";
 
-export function FullPageSection({ id, children }) {
+const spacingMap = {
+  default: { base: "12", md: "16", lg: "20" },
+  tight: { base: "10", md: "12", lg: "14" },
+};
+
+export function FullPageSection({ id, children, fillViewport = false, spacing = "default" }) {
+  const sectionPy = spacingMap[spacing] ?? spacingMap.default;
+
   return (
     <Box
       id={id}
-      // header é fixed, então descontamos a altura no desktop
-      minH={{ base: "auto", lg: "calc(100svh - 92px)" }}
-      scrollSnapAlign="none"
+      minH={fillViewport ? { base: "auto", lg: "calc(100svh - 92px)" } : "auto"}
       scrollMarginTop={{ base: "88px", lg: "96px" }}
       position="relative"
       display="flex"
-      alignItems="center"
+      alignItems={fillViewport ? "center" : "flex-start"}
       justifyContent="center"
-      py={{ base: "14", lg: "0" }}
+      py={fillViewport ? { base: "16", lg: "0" } : sectionPy}
       w="full"
-      
     >
       {children}
     </Box>

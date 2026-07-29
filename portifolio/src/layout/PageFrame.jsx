@@ -53,37 +53,50 @@ export function PageFrame({ children }) {
 
   useEffect(() => {
     if (!isHome) return;
-    const ids = navItems.map((n) => n.id);
-    const elements = ids
-      .map((id) => document.getElementById(id))
-      .filter(Boolean);
 
-    if (elements.length === 0) return;
+    const headerOffset = 96;
 
-    const obs = new IntersectionObserver(
-      (entries) => {
-        const visible = entries
-          .filter((e) => e.isIntersecting)
-          .sort(
-            (a, b) => (b.intersectionRatio ?? 0) - (a.intersectionRatio ?? 0),
-          )[0];
-        const id = visible?.target?.id;
-        if (id) setActiveId(id);
-      },
-      {
-        root: null,
-        threshold: [0.25, 0.4, 0.6],
-        rootMargin: "-20% 0px -55% 0px",
-      },
-    );
+    const updateActiveSection = () => {
+      const ids = navItems.map((n) => n.id);
+      const marker = window.scrollY + headerOffset + window.innerHeight * 0.3;
 
-    elements.forEach((el) => obs.observe(el));
-    return () => obs.disconnect();
+      let current = ids[0];
+
+      for (const id of ids) {
+        const el = document.getElementById(id);
+        if (!el) continue;
+
+        const top = el.getBoundingClientRect().top + window.scrollY;
+        if (top <= marker) {
+          current = id;
+        }
+      }
+
+      const atBottom =
+        window.innerHeight + window.scrollY >=
+        document.documentElement.scrollHeight - 8;
+
+      if (atBottom) {
+        current = ids[ids.length - 1];
+      }
+
+      setActiveId((prev) => (prev === current ? prev : current));
+    };
+
+    updateActiveSection();
+    window.addEventListener("scroll", updateActiveSection, { passive: true });
+    window.addEventListener("resize", updateActiveSection, { passive: true });
+
+    return () => {
+      window.removeEventListener("scroll", updateActiveSection);
+      window.removeEventListener("resize", updateActiveSection);
+    };
   }, [isHome]);
 
   const handleNavClick = (id) => (e) => {
     e.preventDefault();
     setOpen(false);
+    setActiveId(id);
 
     if (isHome) {
       const el = document.getElementById(id);

@@ -1,18 +1,19 @@
 import { Box, Image, VStack, Text } from "@chakra-ui/react";
+
 import { GlassCard } from "./GlassCard.jsx";
 import { cardHoverEffect } from "../styles/hoverEffects.js";
 
 export function SkillCard({ icon, name, iconSize = "100%" }) {
   return (
-    <GlassCard 
-      maxW="100%" 
+    <GlassCard
+      maxW="100%"
+      p={{ base: "3", md: "3" }}
       boxShadow={{ base: "lg", _dark: "0 8px 32px rgba(0, 0, 0, 0.4)" }}
       {...cardHoverEffect}
-      
     >
-      <VStack gap="3">
+      <VStack gap="2">
         <Box
-          boxSize="100px"
+          boxSize={{ base: "64px", md: "72px" }}
           display="flex"
           alignItems="center"
           justifyContent="center"
@@ -25,7 +26,7 @@ export function SkillCard({ icon, name, iconSize = "100%" }) {
             objectFit="contain"
           />
         </Box>
-        <Text fontSize="lg" fontWeight="800">
+        <Text fontSize="md" fontWeight="800">
           {name}
         </Text>
       </VStack>

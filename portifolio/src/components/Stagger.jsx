@@ -1,8 +1,16 @@
-import { motion } from "motion/react"
+import { motion, useReducedMotion } from "motion/react";
 
-const MotionDiv = motion.div
+const MotionDiv = motion.div;
 
-export function Stagger({ children, stagger = 0.06, delay = 0 }) {
+const EASE = [0.22, 1, 0.36, 1];
+
+export function Stagger({ children, stagger = 0.07, delay = 0 }) {
+  const prefersReducedMotion = useReducedMotion();
+
+  if (prefersReducedMotion) {
+    return <div>{children}</div>;
+  }
+
   return (
     <MotionDiv
       variants={{
@@ -11,24 +19,29 @@ export function Stagger({ children, stagger = 0.06, delay = 0 }) {
       }}
       initial="hidden"
       whileInView="show"
-      viewport={{ once: true, amount: 0.3, margin: "-96px 0px -20% 0px" }}
+      viewport={{ once: true, amount: 0.1, margin: "0px 0px -6% 0px" }}
     >
       {children}
     </MotionDiv>
-  )
+  );
 }
 
-export function StaggerItem({ children }) {
+export function StaggerItem({ children, y = 24 }) {
+  const prefersReducedMotion = useReducedMotion();
+
+  if (prefersReducedMotion) {
+    return <div>{children}</div>;
+  }
+
   return (
     <MotionDiv
       variants={{
-        hidden: { opacity: 0, y: 10, filter: "blur(6px)" },
-        show: { opacity: 1, y: 0, filter: "blur(0px)" },
+        hidden: { opacity: 0, y },
+        show: { opacity: 1, y: 0 },
       }}
-      transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+      transition={{ duration: 0.5, ease: EASE }}
     >
       {children}
     </MotionDiv>
-  )
+  );
 }
-

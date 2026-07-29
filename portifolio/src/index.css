@@ -3,16 +3,9 @@ body {
   height: 100%;
 }
 
-@media (min-width: 1024px) {
-  html {
-    scroll-behavior: smooth;
-    scroll-snap-type: y mandatory;
-  }
-}
-
-.vertical-timeline {
-  max-width: none !important;
-  width: 100% !important;
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 96px;
 }
 
 body {
@@ -21,4 +14,23 @@ body {
 
 #root {
   min-height: 100%;
+}
+
+.vertical-timeline {
+  max-width: none !important;
+  width: 100% !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
