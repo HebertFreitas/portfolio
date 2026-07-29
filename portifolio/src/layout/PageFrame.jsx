@@ -18,6 +18,7 @@ const navItems = [
   { label: "INICIO", to: "/#inicio", id: "inicio" },
   { label: "HABILIDADES", to: "/#habilidades", id: "habilidades" },
   { label: "EXPERIÊNCIAS", to: "/#experiencias", id: "experiencias" },
+  { label: "PROJETOS", to: "/#projetos", id: "projetos" },
   { label: "CONHECIMENTO", to: "/#conhecimento", id: "conhecimento" },
   { label: "CONTATO", to: "/#contato", id: "contato" },
 ];
@@ -38,6 +39,7 @@ export function PageFrame({ children }) {
       "/": "inicio",
       "/habilidades": "habilidades",
       "/experiencias": "experiencias",
+      "/projetos": "projetos",
       "/conhecimento": "conhecimento",
       "/contato": "contato",
     };

@@ -1,7 +1,17 @@
 <!doctype html>
-<html lang="pt-BR">
+<html lang="pt-BR" class="dark" style="color-scheme: dark">
   <head>
     <meta charset="UTF-8" />
+    <script>
+      (function () {
+        var key = "portfolio-color-mode";
+        var mode = localStorage.getItem(key);
+        if (mode !== "light" && mode !== "dark") mode = "dark";
+        var root = document.documentElement;
+        root.classList.toggle("dark", mode === "dark");
+        root.style.colorScheme = mode;
+      })();
+    </script>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 

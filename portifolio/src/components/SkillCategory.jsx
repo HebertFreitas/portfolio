@@ -6,7 +6,7 @@ import { Reveal } from "../components/Reveal.jsx";
 
 export function SkillCategory({ title, skills, delay = 0 }) {
   return (
-    <Reveal delay={delay}>
+    <Reveal delay={delay} duration={0.35} y={16} amount={0.08}>
       <GlassCard maxW="100%" height="100%" p={{ base: "4", md: "5" }}>
         <Text
           fontWeight="700"

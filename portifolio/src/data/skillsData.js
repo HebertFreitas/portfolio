@@ -1,7 +1,7 @@
 export const skillsData = [
   {
     title: "Front-end",
-    delay: 0.4,
+    delay: 0.05,
     skills: [
       { name: "Flutter", icon: "/uploads/flutter.png" },
       { name: "Dart", icon: "/uploads/dart.png" },
@@ -14,7 +14,7 @@ export const skillsData = [
   },
   {
     title: "Back-end",
-    delay: 0.8,
+    delay: 0.1,
     skills: [
       { name: "C#", icon: "/uploads/csharp.png" },
       { name: ".NET", icon: "/uploads/dotnet.png" },
@@ -23,7 +23,7 @@ export const skillsData = [
   },
   {
     title: "Banco de Dados",
-    delay: 1.2,
+    delay: 0.15,
     skills: [
       { name: "SQL Server", icon: "/uploads/sql.png" },
       { name: "MySQL", icon: "/uploads/mysql.png" },
@@ -32,7 +32,7 @@ export const skillsData = [
   },
   {
     title: "Ferramentas",
-    delay: 1.6,
+    delay: 0.2,
     skills: [
       { name: "Postman", icon: "/uploads/postman.png" },
       { name: "GitHub", icon: "/uploads/github.png", iconSize: "130%" },
