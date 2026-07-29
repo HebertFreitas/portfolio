@@ -16,7 +16,7 @@ export const projectsData = [
       "Landing page institucional da Clínica Ser Caminho, com layout responsivo, seções de serviços e conversão para agendamento.",
     stack: ["React", "TypeScript", "Next.js"],
     github: "https://github.com/HebertFreitas/clinica-ser-caminho",
-    demo: "https://clinica-ser-caminho-hebertfreitas-projects.vercel.app/",
+    demo: "https://clinica-ser-caminho-msgi.vercel.app/",
     image: "/projects/landingpage.jpeg",
   },
   {
