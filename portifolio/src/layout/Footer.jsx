@@ -36,7 +36,7 @@ export function Footer() {
       borderColor={{ base: "border", _dark: "whiteAlpha.200" }}
       bg="transparent"
     >
-      <Container maxW="6xl" py="8">
+      <Container maxW="6xl" py={{ base: "6", md: "8" }} px={{ base: "4", md: "6" }}>
         <Stack
           gap="6"
           align={{ base: "center", md: "stretch" }}
@@ -57,7 +57,7 @@ export function Footer() {
               </Text>
             </Stack>
 
-            <HStack gap="4" flexWrap="wrap" justify="center">
+            <HStack gap={{ base: "3", md: "4" }} flexWrap="wrap" justify="center">
               {navLinks.map((link) => (
                 <Link
                   key={link.href}

@@ -38,7 +38,7 @@ function ExperienceEntry({ experience, index, isLast }) {
     <Grid
         templateColumns={{ base: "1fr", md: "72px 48px 1fr" }}
         gap={{ base: "4", md: "0" }}
-        pb={{ base: "10", md: isLast ? "0" : "12" }}
+        pb={{ base: "8", md: isLast ? "0" : "12" }}
         position="relative"
       >
         <Text
@@ -69,8 +69,8 @@ function ExperienceEntry({ experience, index, isLast }) {
           rounded={{ base: "lg", md: "none" }}
           roundedRight={{ md: "lg" }}
           bg={{ base: "bg.panel", _dark: "whiteAlpha.30" }}
-          p={{ base: "5", md: "6" }}
-          pl={{ base: "5", md: "8" }}
+          p={{ base: "4", sm: "5", md: "6" }}
+          pl={{ base: "4", sm: "5", md: "8" }}
           position="relative"
           transition="border-color 0.25s ease, background 0.25s ease"
           _hover={{
@@ -105,9 +105,9 @@ function ExperienceEntry({ experience, index, isLast }) {
 
           <Text
             position="absolute"
-            top={{ base: "4", md: "5" }}
-            right={{ base: "4", md: "6" }}
-            fontSize={{ base: "3xl", md: "4xl" }}
+            top={{ base: "3", md: "5" }}
+            right={{ base: "3", md: "6" }}
+            fontSize={{ base: "2xl", md: "4xl" }}
             fontWeight="900"
             letterSpacing="-0.06em"
             lineHeight="1"
@@ -118,7 +118,7 @@ function ExperienceEntry({ experience, index, isLast }) {
             {entryNumber}
           </Text>
 
-          <Stack gap="4" pr={{ base: "10", md: "14" }}>
+          <Stack gap="4" pr={{ base: "8", md: "14" }}>
             <Stack gap="2">
               <HStack gap="3" flexWrap="wrap" align="center">
                 <Box

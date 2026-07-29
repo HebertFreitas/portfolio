@@ -160,11 +160,11 @@ export function ContactSection() {
         <Reveal y={24}>
           <GlassCard
             w="full"
-            p={{ base: "6", md: "10", lg: "12" }}
+            p={{ base: "5", sm: "6", md: "10", lg: "12" }}
             position="relative"
             overflow="hidden"
           >
-            <Stack gap={{ base: "8", md: "10" }}>
+            <Stack gap={{ base: "6", md: "10" }}>
               <Stack gap="6" align="center" textAlign="center">
                 <Text
                   fontSize={{ base: "lg", md: "xl" }}
@@ -177,20 +177,28 @@ export function ContactSection() {
                   melhor forma de trabalhar juntos.
                 </Text>
 
-                <HStack gap="4" flexWrap="wrap" justify="center" w="full">
+                <HStack
+                  gap={{ base: "3", md: "4" }}
+                  flexWrap="wrap"
+                  justify="center"
+                  w="full"
+                  flexDirection={{ base: "column", sm: "row" }}
+                  align={{ base: "stretch", sm: "center" }}
+                >
                   <Button
                     asChild
                     colorPalette="blue"
-                    size="xl"
+                    size={{ base: "lg", md: "xl" }}
                     rounded="xl"
-                    px={{ base: "8", md: "10" }}
-                    h={{ base: "14", md: "16" }}
-                    fontSize={{ base: "md", md: "lg" }}
+                    px={{ base: "6", md: "10" }}
+                    h={{ base: "12", md: "16" }}
+                    fontSize={{ base: "sm", md: "lg" }}
+                    w={{ base: "full", sm: "auto" }}
                     {...cardHoverEffect}
                   >
                     <a href={WHATSAPP_URL} target="_blank" rel="noreferrer">
-                      <HStack gap="3">
-                        <FaWhatsapp size={22} />
+                      <HStack gap="3" justify="center">
+                        <FaWhatsapp size={20} />
                         <span>Iniciar conversa no WhatsApp</span>
                       </HStack>
                     </a>
@@ -199,17 +207,18 @@ export function ContactSection() {
                   <Button
                     asChild
                     variant="outline"
-                    size="xl"
+                    size={{ base: "lg", md: "xl" }}
                     rounded="xl"
-                    px={{ base: "8", md: "10" }}
-                    h={{ base: "14", md: "16" }}
-                    fontSize={{ base: "md", md: "lg" }}
+                    px={{ base: "6", md: "10" }}
+                    h={{ base: "12", md: "16" }}
+                    fontSize={{ base: "sm", md: "lg" }}
+                    w={{ base: "full", sm: "auto" }}
                     borderColor={{ base: "border", _dark: "whiteAlpha.300" }}
                     {...cardHoverEffect}
                   >
                     <a href={LINKEDIN_URL} target="_blank" rel="noreferrer">
-                      <HStack gap="3">
-                        <FaLinkedin size={20} />
+                      <HStack gap="3" justify="center">
+                        <FaLinkedin size={18} />
                         <span>Conectar no LinkedIn</span>
                       </HStack>
                     </a>
@@ -231,7 +240,7 @@ export function ContactSection() {
                 </SimpleGrid>
               </Stagger>
 
-              <SimpleGrid columns={{ base: 1, sm: 3 }} gap="4" w="full" pt="2">
+              <SimpleGrid columns={{ base: 1, md: 3 }} gap="3" w="full" pt="2">
                 {trustSignals.map(({ icon: Icon, text }) => (
                   <HStack
                     key={text}

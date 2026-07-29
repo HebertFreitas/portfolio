@@ -15,7 +15,7 @@ export function AboutSection() {
           description="Domínio em front-end, back-end, banco de dados e ferramentas — pronto para integrar times e liderar entregas de ponta a ponta."
         />
 
-        <SimpleGrid columns={{ base: 1, md: 2 }} gap="4" w="100%">
+        <SimpleGrid columns={{ base: 1, md: 2 }} gap={{ base: "3", md: "4" }} w="100%">
           {skillsData.map((category) => (
             <SkillCategory
               key={category.title}

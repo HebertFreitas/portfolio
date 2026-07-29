@@ -13,7 +13,8 @@ export function SectionHeader({
     <Reveal delay={delay}>
       <Stack
         gap={compact ? "3" : "4"}
-        mb={compact ? { base: "6", md: "7" } : { base: "8", md: "10" }}
+        mb={compact ? { base: "5", md: "7" } : { base: "6", md: "10" }}
+        px={{ base: "1", md: "0" }}
         textAlign="center"
         align="center"
         maxW="3xl"
@@ -47,7 +48,7 @@ export function SectionHeader({
 
         <Heading
           as="h2"
-          fontSize={compact ? { base: "xl", md: "3xl" } : { base: "2xl", md: "4xl" }}
+          fontSize={compact ? { base: "xl", md: "3xl" } : { base: "xl", sm: "2xl", md: "4xl" }}
           fontWeight="800"
           letterSpacing="-0.03em"
           lineHeight="1.1"

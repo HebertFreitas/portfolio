@@ -56,7 +56,7 @@ export function PageFrame({ children }) {
   useEffect(() => {
     if (!isHome) return;
 
-    const headerOffset = 96;
+    const headerOffset = window.innerWidth < 768 ? 76 : 96;
 
     const updateActiveSection = () => {
       const ids = navItems.map((n) => n.id);
@@ -133,8 +133,8 @@ export function PageFrame({ children }) {
           left="0"
           right="0"
           zIndex="50"
-          px={{ base: "4", md: "10" }}
-          py={{ base: "4", md: "5" }}
+          px={{ base: "3", md: "10" }}
+          py={{ base: "3", md: "5" }}
           bg={{
             base: "bg",
             _dark: isScrolled ? "rgba(0, 0, 0, 0.31)" : "rgba(0, 0, 0, 0.13)",
@@ -257,10 +257,11 @@ export function PageFrame({ children }) {
 
         <Box
           position="relative"
-          px={{ base: "4", md: "10" }}
-          pt={{ base: "90px", md: "92px" }}
+          px={{ base: "4", sm: "5", md: "10" }}
+          pt={{ base: "76px", md: "92px" }}
+          pb={{ base: "6", md: "0" }}
         >
-          <Box maxW="80%" mx="auto" w="full">
+          <Box maxW={{ base: "100%", lg: "80%" }} mx="auto" w="full">
             {children}
           </Box>
         </Box>

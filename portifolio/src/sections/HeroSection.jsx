@@ -48,13 +48,13 @@ export function HeroSection() {
 
       <SimpleGrid
         columns={{ base: 1, lg: 2 }}
-        gap={{ base: "10", lg: "16" }}
+        gap={{ base: "8", md: "10", lg: "16" }}
         alignItems="center"
         w="full"
         position="relative"
       >
-        <Stack gap="7" align="center" textAlign="center">
-          <Stack gap="5" align="center" w="full">
+        <Stack gap={{ base: "6", md: "7" }} align="center" textAlign="center" w="full">
+          <Stack gap={{ base: "4", md: "5" }} align="center" w="full">
             <Reveal delay={0.05}>
               <Box
                 display="inline-flex"
@@ -64,11 +64,13 @@ export function HeroSection() {
                 borderWidth="1px"
                 borderColor={{ base: "blue.200", _dark: "blue.400/30" }}
                 bg={{ base: "blue.50", _dark: "blue.950/40" }}
-                px="4"
+                px={{ base: "3", md: "4" }}
                 py="1.5"
-                fontSize="sm"
+                fontSize={{ base: "xs", md: "sm" }}
                 fontWeight="600"
                 color={{ base: "blue.700", _dark: "blue.300" }}
+                maxW="full"
+                textAlign="center"
               >
                 <Box
                   boxSize="1.5"
@@ -82,10 +84,11 @@ export function HeroSection() {
 
             <Heading
               as="h1"
-              fontSize={{ base: "2.5rem", md: "4rem", lg: "4.5rem" }}
-              lineHeight={{ base: "1.08", md: "1.02" }}
+              fontSize={{ base: "2rem", sm: "2.5rem", md: "4rem", lg: "4.5rem" }}
+              lineHeight={{ base: "1.12", md: "1.02" }}
               letterSpacing="-0.04em"
               fontWeight="800"
+              px={{ base: "1", md: "0" }}
             >
               <Reveal delay={0.1}>
                 <Box as="span" display="block">
@@ -112,8 +115,9 @@ export function HeroSection() {
               <Text
                 maxW="lg"
                 mx="auto"
+                px={{ base: "1", md: "0" }}
                 color={{ base: "fg.muted", _dark: "whiteAlpha.700" }}
-                fontSize={{ base: "md", md: "lg" }}
+                fontSize={{ base: "sm", sm: "md", md: "lg" }}
                 lineHeight="1.75"
               >
                 Olá, sou{" "}
@@ -128,13 +132,21 @@ export function HeroSection() {
           </Stack>
 
           <Reveal delay={0.34}>
-            <HStack gap="3" flexWrap="wrap" justify="center">
+            <Stack
+              gap="3"
+              w="full"
+              maxW={{ base: "sm", sm: "none" }}
+              flexDirection={{ base: "column", sm: "row" }}
+              align={{ base: "stretch", sm: "center" }}
+              justify="center"
+            >
               <Button
                 asChild
                 colorPalette="blue"
-                size="lg"
+                size={{ base: "md", md: "lg" }}
                 rounded="lg"
                 px="6"
+                w={{ base: "full", sm: "auto" }}
                 {...cardHoverEffect}
               >
                 <a href={WHATSAPP_URL} target="_blank" rel="noreferrer">
@@ -148,9 +160,10 @@ export function HeroSection() {
               <Button
                 asChild
                 variant="outline"
-                size="lg"
+                size={{ base: "md", md: "lg" }}
                 rounded="lg"
                 px="6"
+                w={{ base: "full", sm: "auto" }}
                 borderColor={{ base: "border", _dark: "whiteAlpha.300" }}
                 {...cardHoverEffect}
               >
@@ -166,11 +179,11 @@ export function HeroSection() {
                   Ver habilidades →
                 </a>
               </Button>
-            </HStack>
+            </Stack>
           </Reveal>
 
           <Reveal delay={0.42}>
-            <HStack gap="3" flexWrap="wrap" justify="center">
+            <HStack gap="3" flexWrap="wrap" justify="center" w="full">
               <Button
                 asChild
                 colorPalette="blue"
@@ -218,15 +231,17 @@ export function HeroSection() {
           </Reveal>
         </Stack>
 
-        <Stack gap="5" alignItems="center">
+        <Stack gap="5" alignItems="center" w="full">
           <Reveal delay={0.5}>
             <Box
               rounded="full"
               overflow="hidden"
               borderWidth="1px"
               borderColor={{ base: "border", _dark: "whiteAlpha.200" }}
-              boxSize={{ base: "280px", md: "400px", lg: "420px" }}
+              w={{ base: "min(240px, 70vw)", sm: "280px", md: "400px", lg: "420px" }}
+              aspectRatio="1"
               flex="0 0 auto"
+              mx="auto"
               boxShadow={{
                 base: "0 0 40px rgba(59, 130, 246, 0.25)",
                 _dark: "0 0 70px rgba(59, 130, 246, 0.35)",
@@ -249,7 +264,7 @@ export function HeroSection() {
       <MotionBox
         position="absolute"
         insetInline="0"
-        bottom={{ base: "24px", md: "48px" }}
+        bottom={{ base: "16px", md: "48px" }}
         display="flex"
         justifyContent="center"
         initial={{ opacity: 0 }}

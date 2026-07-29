@@ -17,7 +17,7 @@ export function ProjectsSection() {
         />
 
         <Stagger stagger={0.08}>
-          <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} gap="5" w="full">
+          <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} gap={{ base: "4", md: "5" }} w="full">
             {projectsData.map((project) => (
               <StaggerItem key={project.id} y={20}>
                 <ProjectCard project={project} />

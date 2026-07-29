@@ -17,7 +17,7 @@ export function ProjectCard({ project }) {
       {...cardHoverEffect}
     >
       <Box
-        h={{ base: "180px", md: "200px" }}
+      h={{ base: "160px", sm: "180px", md: "200px" }}
         bg={{
           base: "linear-gradient(135deg, var(--chakra-colors-blue-50), var(--chakra-colors-purple-50))",
           _dark: "linear-gradient(135deg, rgba(30,58,138,0.35), rgba(88,28,135,0.25))",
@@ -53,7 +53,7 @@ export function ProjectCard({ project }) {
         )}
       </Box>
 
-      <Stack gap="4" p={{ base: "5", md: "6" }} flex="1">
+      <Stack gap="3" p={{ base: "4", sm: "5", md: "6" }} flex="1">
         <Stack gap="2" textAlign="center" align="center">
           <Text as="h3" fontWeight="800" fontSize="lg" letterSpacing="-0.02em">
             {project.title}
