@@ -1,8 +1,7 @@
 import { motion, useReducedMotion } from "motion/react";
+import { motionTokens } from "../lib/motionTokens.js";
 
 const MotionDiv = motion.div;
-
-const EASE = [0.22, 1, 0.36, 1];
 
 export function Stagger({ children, stagger = 0.07, delay = 0 }) {
   const prefersReducedMotion = useReducedMotion();
@@ -39,7 +38,7 @@ export function StaggerItem({ children, y = 24 }) {
         hidden: { opacity: 0, y },
         show: { opacity: 1, y: 0 },
       }}
-      transition={{ duration: 0.5, ease: EASE }}
+      transition={{ duration: motionTokens.duration.slow, ease: motionTokens.ease }}
     >
       {children}
     </MotionDiv>

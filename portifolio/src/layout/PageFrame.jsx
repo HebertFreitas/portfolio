@@ -10,9 +10,12 @@ import {
 import { useEffect, useMemo, useState } from "react";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { FiMenu, FiX } from "react-icons/fi";
+import { motion } from "motion/react";
 
+import { FloatingActions } from "../components/FloatingActions.jsx";
 import { ThemeToggle } from "../components/ThemeToggle.jsx";
-import { hover } from "motion/react";
+
+const MotionBox = motion.create(Box);
 
 const navItems = [
   { label: "INICIO", to: "/#inicio", id: "inicio" },
@@ -114,19 +117,15 @@ export function PageFrame({ children }) {
 
   return (
     <Box position="relative" overflowX="hidden">
-      <Box
+      <MotionBox
         position="absolute"
         inset="0"
         pointerEvents="none"
-        bg={{
-          base: "radial-gradient(900px 450px at 20% 10%, rgba(124,58,237,0.10), transparent 55%), radial-gradient(900px 520px at 85% 35%, rgba(0,0,0,0.06), transparent 60%)",
-          _dark:
-            "radial-gradient(900px 450px at 18% 10%, rgba(124,58,237,0.22), transparent 55%), radial-gradient(900px 520px at 85% 35%, rgba(255,255,255,0.10), transparent 60%)",
-        }}
+        bg={{ base: "radial-gradient(900px 520px at 18% 8%, rgba(59,130,246,.10), transparent 60%)", _dark: "radial-gradient(900px 520px at 18% 8%, rgba(59,130,246,.12), transparent 60%)" }}
       />
 
       <Box position="relative">
-        <Box
+        <MotionBox
           as="header"
           position="fixed"
           top="0"
@@ -135,13 +134,13 @@ export function PageFrame({ children }) {
           zIndex="50"
           px={{ base: "3", md: "10" }}
           py={{ base: "3", md: "5" }}
-          bg={{
-            base: "bg",
-            _dark: isScrolled ? "rgba(0, 0, 0, 0.31)" : "rgba(0, 0, 0, 0.13)",
-          }}
+          bg={{ base: isScrolled ? "rgba(249,249,247,.9)" : "rgba(249,249,247,.68)", _dark: isScrolled ? "rgba(17,21,25,.92)" : "rgba(17,21,25,.52)" }}
           borderBottomWidth="1px"
           borderColor={{ base: "border", _dark: "whiteAlpha.200" }}
-          backdropFilter={{ _dark: "blur(14px)" }}
+          backdropFilter="blur(14px)"
+          initial={{ y: -80, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: .72, delay: .2, ease: [0.22, 1, 0.36, 1] }}
         >
           <Box
             position="absolute"
@@ -165,7 +164,6 @@ export function PageFrame({ children }) {
                   gap={{ base: "2", lg: "7" }}
                   display={{ base: "none", md: "flex" }}
                   align="center"
-                  {...hover.glowHoverEffect}
                 >
                   {navItems.map((item) => (
                     <Link
@@ -184,9 +182,14 @@ export function PageFrame({ children }) {
                         color: { base: "fg", _dark: "whiteAlpha.900" },
                       }}
                       fontWeight={activeKey === item.id ? "800" : "500"}
+                      position="relative"
+                      py="2"
                       onClick={handleNavClick(item.id)}
                     >
                       {item.label}
+                      {activeKey === item.id ? (
+                        <MotionBox layoutId="nav-underline" position="absolute" left="0" right="0" bottom="0" h="2px" bg="#3b82f6" transition={{ type: "spring", stiffness: 360, damping: 24 }} />
+                      ) : null}
                     </Link>
                   ))}
                 </HStack>
@@ -253,7 +256,7 @@ export function PageFrame({ children }) {
               </HStack>
             </HStack>
           </Box>
-        </Box>
+        </MotionBox>
 
         <Box
           position="relative"
@@ -261,11 +264,12 @@ export function PageFrame({ children }) {
           pt={{ base: "76px", md: "92px" }}
           pb={{ base: "6", md: "0" }}
         >
-          <Box maxW={{ base: "100%", lg: "80%" }} mx="auto" w="full">
+          <Box maxW="1200px" mx="auto" w="full">
             {children}
           </Box>
         </Box>
       </Box>
+      <FloatingActions />
     </Box>
   );
 }

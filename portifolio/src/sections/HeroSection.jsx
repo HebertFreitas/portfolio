@@ -1,304 +1,90 @@
-import {
-  Box,
-  Button,
-  Heading,
-  HStack,
-  Image,
-  SimpleGrid,
-  Stack,
-  Text,
-} from "@chakra-ui/react";
-import { motion } from "motion/react";
+import { Box, Button, Grid, Heading, HStack, Image, Stack, Text } from "@chakra-ui/react";
+import { motion, useReducedMotion, useScroll, useTransform } from "motion/react";
+import { useRef } from "react";
 import { FaDownload, FaGithub, FaLinkedin, FaWhatsapp } from "react-icons/fa";
-import { FiChevronDown } from "react-icons/fi";
+import { FiArrowDownRight } from "react-icons/fi";
 
 import { Reveal } from "../components/Reveal.jsx";
 import { RESUME_FILENAME, RESUME_URL } from "../data/siteLinks.js";
 import { FullPageSection } from "./FullPageSection.jsx";
-import { cardHoverEffect } from "../styles/hoverEffects.js";
 
 const MotionBox = motion.create(Box);
-
 const WHATSAPP_URL = "https://wa.me/5531991059695";
 const LINKEDIN_URL = "https://www.linkedin.com/in/hebert-freitas-775093175/";
 const GITHUB_URL = "https://github.com/HebertFreitas";
 
 export function HeroSection() {
-  return (
-    <FullPageSection id="inicio" fillViewport>
-      <Box
-        position="absolute"
-        inset="0"
-        pointerEvents="none"
-        overflow="hidden"
-        aria-hidden="true"
-      >
-        <Box
-          position="absolute"
-          top="-20%"
-          left="50%"
-          transform="translateX(-50%)"
-          w={{ base: "320px", md: "560px" }}
-          h={{ base: "320px", md: "560px" }}
-          rounded="full"
-          bg={{ base: "blue.100/60", _dark: "blue.600/15" }}
-          filter="blur(80px)"
-        />
-      </Box>
+  const heroRef = useRef(null);
+  const reduceMotion = useReducedMotion();
+  const { scrollYProgress } = useScroll({ target: heroRef, offset: ["start start", "end start"] });
+  const imageY = useTransform(scrollYProgress, [0, 1], ["0%", reduceMotion ? "0%" : "12%"]);
+  const contentOpacity = useTransform(scrollYProgress, [0, 0.72], [1, reduceMotion ? 1 : 0]);
 
-      <SimpleGrid
-        columns={{ base: 1, lg: 2 }}
-        gap={{ base: "8", md: "10", lg: "16" }}
-        alignItems="center"
-        w="full"
-        position="relative"
-      >
-        <Stack gap={{ base: "6", md: "7" }} align="center" textAlign="center" w="full">
-          <Stack gap={{ base: "4", md: "5" }} align="center" w="full">
-            <Reveal delay={0.05}>
-              <Box
-                display="inline-flex"
-                alignItems="center"
-                gap="2"
-                rounded="full"
-                borderWidth="1px"
-                borderColor={{ base: "blue.200", _dark: "blue.400/30" }}
-                bg={{ base: "blue.50", _dark: "blue.950/40" }}
-                px={{ base: "3", md: "4" }}
-                py="1.5"
-                fontSize={{ base: "xs", md: "sm" }}
-                fontWeight="600"
-                color={{ base: "blue.700", _dark: "blue.300" }}
-                maxW="full"
-                textAlign="center"
-              >
-                <Box
-                  boxSize="1.5"
-                  rounded="full"
-                  bg="green.400"
-                  animation="pulse 2s ease-in-out infinite"
-                />
-                Disponível para novos projetos
+  const scrollToSkills = () => document.getElementById("habilidades")?.scrollIntoView({
+    behavior: reduceMotion ? "auto" : "smooth",
+  });
+
+  return (
+    <Box ref={heroRef} position="relative">
+      <FullPageSection id="inicio" fillViewport>
+        <MotionBox style={{ opacity: contentOpacity }} w="full" position="relative" zIndex="1">
+          <Grid templateColumns={{ base: "1fr", lg: "minmax(0, 1.08fr) minmax(340px, .92fr)" }} gap={{ base: "12", lg: "16", xl: "24" }} alignItems="center" w="full">
+            <Stack gap={{ base: "7", md: "8" }} align="flex-start" textAlign="left">
+              <Reveal delay={0.05}>
+                <HStack className="availability-pill" gap="3">
+                  <Box boxSize="7px" rounded="full" bg="blue.400" boxShadow="0 0 0 6px rgba(59,130,246,.12)" />
+                  <Text>Disponível para novos projetos</Text>
+                </HStack>
+              </Reveal>
+
+              <Heading as="h1" fontSize={{ base: "clamp(3rem, 15vw, 4.5rem)", md: "clamp(4.5rem, 9vw, 7rem)" }} lineHeight=".93" letterSpacing="-.055em" fontWeight="500" maxW="850px" className="hero-title">
+                <Reveal delay={0.1}><Box as="span" display="block">Construo produtos</Box></Reveal>
+                <Reveal delay={0.18}><Box as="span" display="block" color={{ base: "blue.600", _dark: "blue.300" }} fontStyle="italic" fontWeight="400">digitais completos.</Box></Reveal>
+              </Heading>
+
+              <Reveal delay={0.26}>
+                <Text maxW="620px" color={{ base: "#56626b", _dark: "rgba(241,238,233,.72)" }} fontSize={{ base: "md", md: "lg" }} lineHeight="1.8">
+                  Sou <Box as="strong" color={{ base: "#171b1f", _dark: "#f1eee9" }}>Hebert Freitas</Box>, desenvolvedor Full Stack. Transformo requisitos complexos em experiências web e mobile claras, performáticas e prontas para crescer.
+                </Text>
+              </Reveal>
+
+              <Reveal delay={0.34}>
+                <HStack gap="3" flexWrap="wrap">
+                  <Button asChild className="primary-cta" size="lg" rounded="full" px="7">
+                    <a href={WHATSAPP_URL} target="_blank" rel="noreferrer"><FaWhatsapp /><span>Vamos conversar</span><FiArrowDownRight /></a>
+                  </Button>
+                  <Button variant="outline" size="lg" rounded="full" px="7" onClick={scrollToSkills} className="secondary-cta">Explorar trabalho</Button>
+                </HStack>
+              </Reveal>
+
+              <Reveal delay={0.42}>
+                <HStack gap="5" className="social-links" flexWrap="wrap">
+                  <a href={LINKEDIN_URL} target="_blank" rel="noreferrer"><FaLinkedin /> LinkedIn</a>
+                  <a href={GITHUB_URL} target="_blank" rel="noreferrer"><FaGithub /> GitHub</a>
+                  <a href={RESUME_URL} download={RESUME_FILENAME}><FaDownload /> Currículo</a>
+                </HStack>
+              </Reveal>
+            </Stack>
+
+            <Reveal delay={0.38} y={42}>
+              <Box className="portrait-wrap">
+                <Box className="portrait-frame">
+                  <MotionBox style={{ y: imageY }} h="112%" mt="-6%">
+                    <Image src="/uploads/hebert-portrait.jpeg" alt="Hebert Freitas usando terno preto em um evento ao ar livre" w="100%" h="100%" objectFit="cover" objectPosition="50% 34%" loading="eager" fetchPriority="high" />
+                  </MotionBox>
+                  <Box className="portrait-shade" aria-hidden="true" />
+                  <Box className="portrait-caption"><Text>FULL STACK DEVELOPER</Text><Text>BELO HORIZONTE · BR</Text></Box>
+                </Box>
+                <MotionBox className="portrait-mark" initial={reduceMotion ? false : { opacity: 0, rotate: -8, scale: .8 }} animate={{ opacity: 1, rotate: 0, scale: 1 }} transition={{ duration: 1.2, delay: .8 }}>HF</MotionBox>
               </Box>
             </Reveal>
+          </Grid>
+        </MotionBox>
 
-            <Heading
-              as="h1"
-              fontSize={{ base: "2rem", sm: "2.5rem", md: "4rem", lg: "4.5rem" }}
-              lineHeight={{ base: "1.12", md: "1.02" }}
-              letterSpacing="-0.04em"
-              fontWeight="800"
-              px={{ base: "1", md: "0" }}
-            >
-              <Reveal delay={0.1}>
-                <Box as="span" display="block">
-                  Construo produtos digitais
-                </Box>
-              </Reveal>
-              <Reveal delay={0.18}>
-                <Box
-                  as="span"
-                  display="block"
-                  mt="2"
-                  bgGradient="to-r"
-                  gradientFrom={{ base: "blue.500", _dark: "blue.300" }}
-                  gradientTo={{ base: "purple.500", _dark: "purple.300" }}
-                  bgClip="text"
-                  color="transparent"
-                >
-                  de ponta a ponta.
-                </Box>
-              </Reveal>
-            </Heading>
-
-            <Reveal delay={0.26}>
-              <Text
-                maxW="lg"
-                mx="auto"
-                px={{ base: "1", md: "0" }}
-                color={{ base: "fg.muted", _dark: "whiteAlpha.700" }}
-                fontSize={{ base: "sm", sm: "md", md: "lg" }}
-                lineHeight="1.75"
-              >
-                Olá, sou{" "}
-                <Box as="span" fontWeight="700" color={{ base: "fg", _dark: "whiteAlpha.900" }}>
-                  Hebert Freitas
-                </Box>
-                — Desenvolvedor Full Stack com experiência em React, Flutter e .NET.
-                Transformo requisitos complexos em aplicações web e mobile escaláveis,
-                com foco em performance e qualidade de código.
-              </Text>
-            </Reveal>
-          </Stack>
-
-          <Reveal delay={0.34}>
-            <Stack
-              gap="3"
-              w="full"
-              maxW={{ base: "sm", sm: "none" }}
-              flexDirection={{ base: "column", sm: "row" }}
-              align={{ base: "stretch", sm: "center" }}
-              justify="center"
-            >
-              <Button
-                asChild
-                colorPalette="blue"
-                size={{ base: "md", md: "lg" }}
-                rounded="lg"
-                px="6"
-                w={{ base: "full", sm: "auto" }}
-                {...cardHoverEffect}
-              >
-                <a href={WHATSAPP_URL} target="_blank" rel="noreferrer">
-                  <HStack gap="2">
-                    <FaWhatsapp size={18} />
-                    <span>Iniciar conversa</span>
-                  </HStack>
-                </a>
-              </Button>
-
-              <Button
-                asChild
-                variant="outline"
-                size={{ base: "md", md: "lg" }}
-                rounded="lg"
-                px="6"
-                w={{ base: "full", sm: "auto" }}
-                borderColor={{ base: "border", _dark: "whiteAlpha.300" }}
-                {...cardHoverEffect}
-              >
-                <a
-                  href="#habilidades"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    document
-                      .getElementById("habilidades")
-                      ?.scrollIntoView({ behavior: "smooth" });
-                  }}
-                >
-                  Ver habilidades →
-                </a>
-              </Button>
-            </Stack>
-          </Reveal>
-
-          <Reveal delay={0.42}>
-            <HStack gap="3" flexWrap="wrap" justify="center" w="full">
-              <Button
-                asChild
-                colorPalette="blue"
-                rounded="full"
-                variant="outline"
-                size="sm"
-                aria-label="LinkedIn"
-                {...cardHoverEffect}
-              >
-                <a href={LINKEDIN_URL} target="_blank" rel="noreferrer">
-                  <FaLinkedin size={18} />
-                </a>
-              </Button>
-
-              <Button
-                asChild
-                colorPalette="blue"
-                rounded="full"
-                variant="outline"
-                size="sm"
-                aria-label="GitHub"
-                {...cardHoverEffect}
-              >
-                <a href={GITHUB_URL} target="_blank" rel="noreferrer">
-                  <FaGithub size={18} />
-                </a>
-              </Button>
-
-              <Button
-                asChild
-                colorPalette="blue"
-                rounded="lg"
-                size="sm"
-                variant="ghost"
-                {...cardHoverEffect}
-              >
-                <a href={RESUME_URL} download={RESUME_FILENAME}>
-                  <HStack gap="2">
-                    <FaDownload size={16} />
-                    <span>Baixar currículo</span>
-                  </HStack>
-                </a>
-              </Button>
-            </HStack>
-          </Reveal>
-        </Stack>
-
-        <Stack gap="5" alignItems="center" w="full">
-          <Reveal delay={0.5}>
-            <Box
-              rounded="full"
-              overflow="hidden"
-              borderWidth="1px"
-              borderColor={{ base: "border", _dark: "whiteAlpha.200" }}
-              w={{ base: "min(240px, 70vw)", sm: "280px", md: "400px", lg: "420px" }}
-              aspectRatio="1"
-              flex="0 0 auto"
-              mx="auto"
-              boxShadow={{
-                base: "0 0 40px rgba(59, 130, 246, 0.25)",
-                _dark: "0 0 70px rgba(59, 130, 246, 0.35)",
-              }}
-            >
-              <Image
-                src="/uploads/me2.png"
-                alt="Hebert Freitas — Desenvolvedor Full Stack especializado em React, Flutter e .NET"
-                w="100%"
-                h="100%"
-                objectFit="cover"
-                loading="eager"
-                fetchPriority="high"
-              />
-            </Box>
-          </Reveal>
-        </Stack>
-      </SimpleGrid>
-
-      <MotionBox
-        position="absolute"
-        insetInline="0"
-        bottom={{ base: "16px", md: "48px" }}
-        display="flex"
-        justifyContent="center"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1, y: [0, 8, 0] }}
-        transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut", delay: 1.2 }}
-        color={{ base: "fg.muted", _dark: "whiteAlpha.700" }}
-        cursor="pointer"
-        role="button"
-        tabIndex={0}
-        aria-label="Rolar para a próxima seção"
-        onClick={() =>
-          document.getElementById("habilidades")?.scrollIntoView({ behavior: "smooth" })
-        }
-        onKeyDown={(e) => {
-          if (e.key === "Enter" || e.key === " ") {
-            e.preventDefault();
-            document.getElementById("habilidades")?.scrollIntoView({ behavior: "smooth" });
-          }
-        }}
-      >
-        <Box
-          borderWidth="1px"
-          borderColor={{ base: "border", _dark: "blue.400" }}
-          bg={{ base: "bg.panel", _dark: "whiteAlpha.50" }}
-          backdropFilter={{ _dark: "blur(10px)" }}
-          rounded="full"
-          px="3"
-          py="2"
-          _hover={{ color: { base: "fg", _dark: "whiteAlpha.900" } }}
-          transition="color 0.2s ease"
-        >
-          <FiChevronDown size={22} />
-        </Box>
-      </MotionBox>
-    </FullPageSection>
+        <MotionBox className="scroll-cue" animate={reduceMotion ? undefined : { y: [0, 7, 0] }} transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut", delay: 1.2 }} onClick={scrollToSkills} role="button" tabIndex={0} aria-label="Rolar para habilidades" onKeyDown={(event) => (event.key === "Enter" || event.key === " ") && scrollToSkills()}>
+          <span>Role para descobrir</span><FiArrowDownRight />
+        </MotionBox>
+      </FullPageSection>
+    </Box>
   );
 }

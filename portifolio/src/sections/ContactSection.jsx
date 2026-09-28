@@ -187,7 +187,9 @@ export function ContactSection() {
                 >
                   <Button
                     asChild
-                    colorPalette="blue"
+                    bg="#22c55e"
+                    color="#07140b"
+                    _hover={{ bg: "#16a34a", color: "white" }}
                     size={{ base: "lg", md: "xl" }}
                     rounded="xl"
                     px={{ base: "6", md: "10" }}
@@ -241,9 +243,9 @@ export function ContactSection() {
               </Stagger>
 
               <SimpleGrid columns={{ base: 1, md: 3 }} gap="3" w="full" pt="2">
-                {trustSignals.map(({ icon: Icon, text }) => (
+                {trustSignals.map((signal) => (
                   <HStack
-                    key={text}
+                    key={signal.text}
                     gap="3"
                     justify="center"
                     p="4"
@@ -252,15 +254,13 @@ export function ContactSection() {
                     borderColor={{ base: "border", _dark: "whiteAlpha.100" }}
                     bg={{ base: "blackAlpha.50", _dark: "whiteAlpha.20" }}
                   >
-                    <Box color={{ base: "blue.600", _dark: "blue.300" }}>
-                      <Icon size={18} />
-                    </Box>
+                    <Box as={signal.icon} color={{ base: "blue.600", _dark: "blue.300" }} boxSize="18px" />
                     <Text
                       fontSize="sm"
                       fontWeight="600"
                       color={{ base: "fg.muted", _dark: "whiteAlpha.700" }}
                     >
-                      {text}
+                      {signal.text}
                     </Text>
                   </HStack>
                 ))}
