@@ -1,6 +1,11 @@
 import { Box, Heading, Stack, Text } from "@chakra-ui/react";
 
+import { motion } from "motion/react";
+
+import { motionTokens } from "../lib/motionTokens.js";
 import { Reveal } from "./Reveal.jsx";
+
+const MotionSpan = motion.span;
 
 export function SectionHeader({
   badge,
@@ -45,6 +50,15 @@ export function SectionHeader({
             {badge}
           </Box>
         ) : null}
+
+        <MotionSpan
+          className="section-rule"
+          aria-hidden="true"
+          initial={{ scaleX: 0 }}
+          whileInView={{ scaleX: 1 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: motionTokens.duration.slow, ease: motionTokens.ease, delay: delay + 0.15 }}
+        />
 
         <Heading
           as="h2"

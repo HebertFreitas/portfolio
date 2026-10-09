@@ -29,4 +29,14 @@ export const projectsData = [
     demo: "https://sercaminho-b508c.web.app/login",
     image: "/projects/agendamento.jpeg",
   },
+  {
+    id: "freittas",
+    title: "Freittas — Produtor Musical",
+    description:
+      "Site para apresentar os serviços de beats, produção e finalização de faixas do produtor musical Freittas, com atendimento online.",
+    stack: ["Vite"],
+    github: "https://github.com/HebertFreitas/freittas",
+    demo: "https://freittas.vercel.app/",
+    image: "/projects/freitas.png",
+  },
 ];

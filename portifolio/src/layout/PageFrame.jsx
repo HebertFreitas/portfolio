@@ -1,19 +1,11 @@
-import {
-  Box,
-  Drawer,
-  HStack,
-  IconButton,
-  Link,
-  Stack,
-  Text,
-} from "@chakra-ui/react";
+import { Box, HStack, Link } from "@chakra-ui/react";
 import { useEffect, useMemo, useState } from "react";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
-import { FiMenu, FiX } from "react-icons/fi";
-import { motion } from "motion/react";
+import { AnimatePresence, motion } from "motion/react";
 
 import { FloatingActions } from "../components/FloatingActions.jsx";
 import { ThemeToggle } from "../components/ThemeToggle.jsx";
+import { motionTokens, staggerContainer } from "../lib/motionTokens.js";
 
 const MotionBox = motion.create(Box);
 
@@ -48,6 +40,20 @@ export function PageFrame({ children }) {
     };
     return map[location.pathname] ?? "inicio";
   }, [activeId, isHome, location.pathname]);
+
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e) => e.key === "Escape" && setOpen(false);
+    const onResize = () => window.innerWidth >= 768 && setOpen(false);
+    document.body.style.overflow = "hidden";
+    document.addEventListener("keydown", onKey);
+    window.addEventListener("resize", onResize);
+    return () => {
+      document.body.style.overflow = "";
+      document.removeEventListener("keydown", onKey);
+      window.removeEventListener("resize", onResize);
+    };
+  }, [open]);
 
   useEffect(() => {
     const onScroll = () => setIsScrolled(window.scrollY > 12);
@@ -133,14 +139,15 @@ export function PageFrame({ children }) {
           right="0"
           zIndex="50"
           px={{ base: "3", md: "10" }}
-          py={{ base: "3", md: "5" }}
-          bg={{ base: isScrolled ? "rgba(249,249,247,.9)" : "rgba(249,249,247,.68)", _dark: isScrolled ? "rgba(17,21,25,.92)" : "rgba(17,21,25,.52)" }}
+          py={{ base: "3", md: isScrolled ? "3" : "5" }}
+          style={{ transition: "padding .35s ease, background-color .35s ease" }}
+          bg={{ base: isScrolled || open ? "rgba(249,249,247,.9)" : "rgba(249,249,247,.68)", _dark: isScrolled || open ? "rgba(17,21,25,.92)" : "rgba(17,21,25,.52)" }}
           borderBottomWidth="1px"
           borderColor={{ base: "border", _dark: "whiteAlpha.200" }}
           backdropFilter="blur(14px)"
           initial={{ y: -80, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: .72, delay: .2, ease: [0.22, 1, 0.36, 1] }}
+          transition={{ duration: motionTokens.duration.slow, delay: 0.2, ease: motionTokens.ease }}
         >
           <Box
             position="absolute"
@@ -151,13 +158,16 @@ export function PageFrame({ children }) {
           />
           <Box position="relative" maxW="100%" mx="auto">
             <HStack w="full" justify="space-between" align="center" gap="6">
-              {/* <Text
-                color={{ base: "fg.muted", _dark: "whiteAlpha.700" }}
-                fontSize="sm"
-                whiteSpace="nowrap"
+
+              <a
+                className="brand-mark"
+                href="/#inicio"
+                aria-label="Hebert Freitas, voltar ao início"
+                onClick={handleNavClick("inicio")}
               >
-                Portfólio • Full Stack
-              </Text> */}
+                <img src="/iniciais_logo.png" alt="" width="44" height="44" />
+                <small>Hebert Freitas</small>
+              </a>
 
               <HStack ml="auto" gap="2" align="center">
                 <HStack
@@ -188,7 +198,7 @@ export function PageFrame({ children }) {
                     >
                       {item.label}
                       {activeKey === item.id ? (
-                        <MotionBox layoutId="nav-underline" position="absolute" left="0" right="0" bottom="0" h="2px" bg="#3b82f6" transition={{ type: "spring", stiffness: 360, damping: 24 }} />
+                        <MotionBox layoutId="nav-underline" position="absolute" left="0" right="0" bottom="0" h="2px" bg="#3b82f6" transition={motionTokens.spring.quick} />
                       ) : null}
                     </Link>
                   ))}
@@ -196,67 +206,59 @@ export function PageFrame({ children }) {
 
                 <ThemeToggle />
 
-                <Drawer.Root open={open} onOpenChange={(e) => setOpen(e.open)}>
-                  <Drawer.Trigger asChild>
-                    <IconButton
-                      display={{ base: "inline-flex", md: "none" }}
-                      variant="ghost"
-                      size="sm"
-                      aria-label="Abrir menu"
-                    >
-                      <FiMenu />
-                    </IconButton>
-                  </Drawer.Trigger>
-
-                  <Drawer.Backdrop />
-                  <Drawer.Positioner>
-                    <Drawer.Content bg="bg" color="fg">
-                      <Drawer.Header
-                        display="flex"
-                        alignItems="center"
-                        justifyContent="space-between"
-                      >
-                        <Text fontWeight="700" letterSpacing="wider">
-                          Menu
-                        </Text>
-                        <Drawer.CloseTrigger asChild>
-                          <IconButton
-                            variant="ghost"
-                            size="sm"
-                            aria-label="Fechar menu"
-                          >
-                            <FiX />
-                          </IconButton>
-                        </Drawer.CloseTrigger>
-                      </Drawer.Header>
-                      <Drawer.Body>
-                        <Stack gap="3">
-                          {navItems.map((item) => (
-                            <Link
-                              key={item.id}
-                              as={NavLink}
-                              to={item.to}
-                              fontSize="sm"
-                              letterSpacing="wider"
-                              textTransform="uppercase"
-                              color={activeKey === item.id ? "fg" : "fg.muted"}
-                              _hover={{ color: "fg" }}
-                              fontWeight={activeKey === item.id ? "700" : "500"}
-                              onClick={handleNavClick(item.id)}
-                              w="fit-content"
-                            >
-                              {item.label}
-                            </Link>
-                          ))}
-                        </Stack>
-                      </Drawer.Body>
-                    </Drawer.Content>
-                  </Drawer.Positioner>
-                </Drawer.Root>
+                <button
+                  type="button"
+                  className={`burger ${open ? "is-open" : ""}`}
+                  aria-label={open ? "Fechar menu" : "Abrir menu"}
+                  aria-expanded={open}
+                  aria-controls="mobile-menu"
+                  onClick={() => setOpen((o) => !o)}
+                >
+                  <span />
+                  <span />
+                </button>
               </HStack>
             </HStack>
           </Box>
         </MotionBox>
+
+        <AnimatePresence>
+          {open && (
+            <motion.div
+              key="menu"
+              id="mobile-menu"
+              className="mobile-menu"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: motionTokens.duration.fast }}
+            >
+              <motion.nav
+                aria-label="Menu"
+                variants={staggerContainer(motionTokens.stagger.tight, 0.08)}
+                initial="hidden"
+                animate="visible"
+                exit="hidden"
+              >
+                {navItems.map((item) => (
+                  <motion.a
+                    key={item.id}
+                    href={item.to}
+                    className={activeKey === item.id ? "is-active" : ""}
+                    aria-current={activeKey === item.id ? "true" : undefined}
+                    onClick={handleNavClick(item.id)}
+                    variants={{
+                      hidden: { opacity: 0, x: -motionTokens.distance.medium },
+                      visible: { opacity: 1, x: 0, transition: motionTokens.spring.gentle },
+                    }}
+                  >
+                    {item.label.charAt(0) + item.label.slice(1).toLowerCase()}
+                  </motion.a>
+                ))}
+              </motion.nav>
+            </motion.div>
+          )}
+        </AnimatePresence>
 
         <Box
           position="relative"

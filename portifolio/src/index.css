@@ -83,7 +83,7 @@ body {
 .portrait-frame::before { content: ""; position: absolute; inset: 14px; border: 1px solid rgba(241,238,233,.32); border-radius: 5px; z-index: 2; pointer-events: none; }
 .portrait-shade { position: absolute; inset: 0; background: linear-gradient(180deg, transparent 54%, rgba(17,21,25,.82) 100%); pointer-events: none; }
 .portrait-caption { position: absolute; z-index: 3; left: 30px; right: 30px; bottom: 26px; display: flex; justify-content: space-between; gap: 16px; color: rgba(241,238,233,.78); font-size: 10px; font-weight: 700; letter-spacing: .14em; }
-.portrait-mark { position: absolute; right: -30px; top: -34px; display: grid; place-items: center; width: 88px; height: 88px; border-radius: 50%; background: #3b82f6; color: white; font-family: Georgia, serif; font-size: 25px; font-style: italic; box-shadow: 0 18px 45px rgba(0,0,0,.25); }
+.portrait-mark { position: absolute; right: -30px; top: -34px; width: 116px; }
 
 .primary-cta { background: #22c55e !important; color: #07140b !important; transition: transform .25s ease, background .25s ease !important; }
 .primary-cta:hover { background: #16a34a !important; color: white !important; transform: translateY(-2px); }
@@ -101,7 +101,7 @@ body {
 }
 
 @media (max-width: 520px) {
-  .portrait-mark { width: 68px; height: 68px; right: -10px; top: -25px; font-size: 20px; }
+  .portrait-mark { width: 88px; right: -10px; top: -25px; }
   .portrait-caption { left: 24px; right: 24px; bottom: 22px; font-size: 8px; }
 }
 
@@ -119,3 +119,48 @@ body {
   }
 
 }
+
+/* ---------- Header: brand, burger, mobile menu ---------- */
+.brand-mark { display: inline-flex; align-items: center; gap: 10px; color: var(--ink); text-decoration: none; }
+.dark .brand-mark { color: var(--on-dark); }
+.brand-mark img {
+  display: block; width: 44px; height: 44px; border-radius: 10px; object-fit: cover;
+  transition: transform .4s cubic-bezier(.22, 1, .36, 1);
+}
+.brand-mark:hover img { transform: rotate(-10deg) scale(1.06); }
+.brand-mark small { font-size: 13px; font-weight: 700; letter-spacing: -.01em; }
+
+.burger { display: none; position: relative; width: 44px; height: 44px; border: 0; background: none; cursor: pointer; color: var(--ink); }
+.dark .burger { color: var(--on-dark); }
+.burger span { position: absolute; left: 11px; right: 11px; height: 1.5px; background: currentColor; transition: transform .35s ease, top .35s ease; }
+.burger span:first-child { top: 17px; }
+.burger span:last-child { top: 26px; }
+.burger.is-open span:first-child { top: 21px; transform: rotate(45deg); }
+.burger.is-open span:last-child { top: 21px; transform: rotate(-45deg); }
+
+.mobile-menu { position: fixed; inset: 0; z-index: 45; display: flex; align-items: center; background: rgba(249, 249, 247, .97); backdrop-filter: blur(16px); }
+.dark .mobile-menu { background: rgba(17, 21, 25, .97); }
+.mobile-menu nav { width: 100%; padding: 92px 24px 40px; display: flex; flex-direction: column; }
+.mobile-menu a {
+  display: flex; align-items: baseline; gap: 14px; padding: 16px 0;
+  font-family: Georgia, "Times New Roman", serif; font-size: clamp(28px, 7vw, 40px); letter-spacing: -.02em;
+  color: var(--ink); text-decoration: none; border-bottom: 1px solid rgba(17, 21, 25, .1);
+  transition: color .25s ease;
+}
+.dark .mobile-menu a { color: var(--on-dark); border-color: rgba(241, 238, 233, .12); }
+.mobile-menu a small { font-family: system-ui, sans-serif; font-size: 11px; font-weight: 700; letter-spacing: .14em; color: var(--slate); }
+.mobile-menu a.is-active, .mobile-menu a:hover { color: #3b82f6; font-style: italic; }
+
+@media (max-width: 767px) {
+  .burger { display: block; }
+  .brand-mark small { display: none; }
+}
+
+/* ---------- Hero line mask + swash ---------- */
+.hero-line { display: block; overflow: hidden; padding-bottom: .08em; }
+.hero-line > * { display: inline-block; }
+.hero-line--em { position: relative; width: fit-content; overflow: visible; }
+.hero-swash { position: absolute; left: 0; right: 0; bottom: -.04em; width: 100%; height: .16em; overflow: visible; }
+.hero-swash path { fill: none; stroke: #3b82f6; stroke-width: 2.5; stroke-linecap: round; }
+
+.section-rule { display: block; width: 44px; height: 2px; background: #3b82f6; transform-origin: center; }

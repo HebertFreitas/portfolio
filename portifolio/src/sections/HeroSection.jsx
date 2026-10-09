@@ -5,6 +5,7 @@ import { FaDownload, FaGithub, FaLinkedin, FaWhatsapp } from "react-icons/fa";
 import { FiArrowDownRight } from "react-icons/fi";
 
 import { Reveal } from "../components/Reveal.jsx";
+import { maskLine, motionTokens, staggerContainer } from "../lib/motionTokens.js";
 import { RESUME_FILENAME, RESUME_URL } from "../data/siteLinks.js";
 import { FullPageSection } from "./FullPageSection.jsx";
 
@@ -38,8 +39,18 @@ export function HeroSection() {
               </Reveal>
 
               <Heading as="h1" fontSize={{ base: "clamp(3rem, 15vw, 4.5rem)", md: "clamp(4.5rem, 9vw, 7rem)" }} lineHeight=".93" letterSpacing="-.055em" fontWeight="500" maxW="850px" className="hero-title">
-                <Reveal delay={0.1}><Box as="span" display="block">Construo produtos</Box></Reveal>
-                <Reveal delay={0.18}><Box as="span" display="block" color={{ base: "blue.600", _dark: "blue.300" }} fontStyle="italic" fontWeight="400">digitais completos.</Box></Reveal>
+                <MotionBox as="span" display="block" variants={staggerContainer(motionTokens.stagger.loose, 0.1)} initial="hidden" animate="visible">
+                  <span className="hero-line"><motion.span variants={maskLine}>Construo produtos</motion.span></span>
+                  <Box as="span" className="hero-line hero-line--em" color={{ base: "blue.600", _dark: "blue.300" }} fontStyle="italic" fontWeight="400">
+                    <motion.span variants={maskLine}>digitais completos.</motion.span>
+                    <svg className="hero-swash" viewBox="0 0 300 14" preserveAspectRatio="none" aria-hidden="true">
+                      <motion.path
+                        d="M2 9 C 60 3, 120 12, 180 7 S 270 4, 298 8"
+                        variants={{ hidden: { pathLength: 0, opacity: 0 }, visible: { pathLength: 1, opacity: 1, transition: { duration: motionTokens.duration.cinematic, ease: motionTokens.easeInOut, delay: 0.6 } } }}
+                      />
+                    </svg>
+                  </Box>
+                </MotionBox>
               </Heading>
 
               <Reveal delay={0.26}>
@@ -75,7 +86,9 @@ export function HeroSection() {
                   <Box className="portrait-shade" aria-hidden="true" />
                   <Box className="portrait-caption"><Text>FULL STACK DEVELOPER</Text><Text>BELO HORIZONTE · BR</Text></Box>
                 </Box>
-                <MotionBox className="portrait-mark" initial={reduceMotion ? false : { opacity: 0, rotate: -8, scale: .8 }} animate={{ opacity: 1, rotate: 0, scale: 1 }} transition={{ duration: 1.2, delay: .8 }}>HF</MotionBox>
+                <MotionBox className="portrait-mark" initial={reduceMotion ? false : { opacity: 0, rotate: -8, scale: .8 }} animate={{ opacity: 1, rotate: 0, scale: 1 }} transition={{ ...motionTokens.spring.gentle, delay: 0.8 }}>
+                  <Image src="/iniciais_sem_fundo.png" alt="Logo HF" w="full" h="auto" />
+                </MotionBox>
               </Box>
             </Reveal>
           </Grid>

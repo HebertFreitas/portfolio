@@ -48,14 +48,17 @@ export function Footer() {
             gap="4"
             align={{ base: "center", md: "center" }}
           >
-            <Stack gap="1" align={{ base: "center", md: "flex-start" }}>
-              <Text fontWeight="800" letterSpacing="-0.02em">
-                Hebert Freitas
-              </Text>
-              <Text fontSize="sm" color="fg.muted">
-                Desenvolvedor Full Stack
-              </Text>
-            </Stack>
+            <HStack gap="3">
+              <Box as="img" src="/iniciais_logo.png" alt="" w="44px" h="44px" borderRadius="10px" objectFit="cover" />
+              <Stack gap="1" align="flex-start">
+                <Text fontWeight="800" letterSpacing="-0.02em">
+                  Hebert Freitas
+                </Text>
+                <Text fontSize="sm" color="fg.muted">
+                  Desenvolvedor Full Stack
+                </Text>
+              </Stack>
+            </HStack>
 
             <HStack gap={{ base: "3", md: "4" }} flexWrap="wrap" justify="center">
               {navLinks.map((link) => (
