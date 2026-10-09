@@ -1,12 +1,10 @@
 import { Box, HStack, Image, Link, Stack, Text } from "@chakra-ui/react";
-import { FaExternalLinkAlt, FaGithub } from "react-icons/fa";
+import { FaExternalLinkAlt } from "react-icons/fa";
 
 import { GlassCard } from "./GlassCard.jsx";
 import { cardHoverEffect } from "../styles/hoverEffects.js";
 
 export function ProjectCard({ project }) {
-  const hasLinks = project.github || project.demo;
-
   return (
     <GlassCard
       h="full"
@@ -86,43 +84,23 @@ export function ProjectCard({ project }) {
           ))}
         </HStack>
 
-        {hasLinks ? (
+        {project.demo ? (
           <HStack gap="3" justify="center" pt="2" mt="auto">
-            {project.github ? (
-              <Link
-                href={project.github}
-                target="_blank"
-                rel="noreferrer"
-                display="inline-flex"
-                alignItems="center"
-                gap="2"
-                fontSize="sm"
-                fontWeight="700"
-                color={{ base: "blue.600", _dark: "blue.300" }}
-                _hover={{ textDecoration: "none", opacity: 0.85 }}
-              >
-                <FaGithub size={16} />
-                GitHub
-              </Link>
-            ) : null}
-
-            {project.demo ? (
-              <Link
-                href={project.demo}
-                target="_blank"
-                rel="noreferrer"
-                display="inline-flex"
-                alignItems="center"
-                gap="2"
-                fontSize="sm"
-                fontWeight="700"
-                color={{ base: "blue.600", _dark: "blue.300" }}
-                _hover={{ textDecoration: "none", opacity: 0.85 }}
-              >
-                <FaExternalLinkAlt size={14} />
-                Demo
-              </Link>
-            ) : null}
+            <Link
+              href={project.demo}
+              target="_blank"
+              rel="noreferrer"
+              display="inline-flex"
+              alignItems="center"
+              gap="2"
+              fontSize="sm"
+              fontWeight="700"
+              color={{ base: "blue.600", _dark: "blue.300" }}
+              _hover={{ textDecoration: "none", opacity: 0.85 }}
+            >
+              <FaExternalLinkAlt size={14} />
+              Demo
+            </Link>
           </HStack>
         ) : null}
       </Stack>

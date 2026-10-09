@@ -81,7 +81,7 @@ export function HeroSection() {
               <Box className="portrait-wrap">
                 <Box className="portrait-frame">
                   <MotionBox style={{ y: imageY }} h="112%" mt="-6%">
-                    <Image src="/uploads/hebert-portrait.jpeg" alt="Hebert Freitas usando terno preto em um evento ao ar livre" w="100%" h="100%" objectFit="cover" objectPosition="50% 34%" loading="eager" fetchPriority="high" />
+                    <Image src="/uploads/hebert-portrait-gray.png" alt="Hebert Freitas usando terno preto diante de um fundo cinza" w="100%" h="100%" objectFit="cover" objectPosition="50% 34%" loading="eager" fetchPriority="high" />
                   </MotionBox>
                   <Box className="portrait-shade" aria-hidden="true" />
                   <Box className="portrait-caption"><Text>FULL STACK DEVELOPER</Text><Text>BELO HORIZONTE · BR</Text></Box>
